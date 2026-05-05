@@ -61,11 +61,11 @@ LC_TIMEOUT		4		Таймаут
 
 ```cpp
 ПОЛЕ
-			РАЗМЕР		  ОПИСАНИЕ
-lcCfg.ssid		 64			SSID WiFi сети
-lcCfg.pass		 64			Пароль WiFi
-lcCfg.webLogin	 32			Логин веб-интерфейса
-lcCfg.webPass	 32			Пароль веб-интерфейса
+			РАЗМЕР		ОПИСАНИЕ
+lcCfg.ssid		 64		SSID WiFi сети
+lcCfg.pass		 64		Пароль WiFi
+lcCfg.webLogin	 32		Логин веб-интерфейса
+lcCfg.webPass	 32		Пароль веб-интерфейса
 ```
 
 ---

@@ -1,0 +1,46 @@
+#######################################
+# Синтаксическая карта для LightConnect
+#######################################
+
+#######################################
+# Название библиотеки (KEYWORD1)
+#######################################
+LightConnect	KEYWORD1
+
+#######################################
+# Методы и функции (KEYWORD2)
+#######################################
+start	KEYWORD2
+stop	KEYWORD2
+tick	KEYWORD2
+run	KEYWORD2
+status	KEYWORD2
+resetStatus	KEYWORD2
+setAPName	KEYWORD2
+setAPPass	KEYWORD2
+
+#######################################
+# Конфигурационные структурные поля (KEYWORD2)
+#######################################
+lcCfg	KEYWORD2
+ssid	KEYWORD2
+pass	KEYWORD2
+webLogin	KEYWORD2
+webPass	KEYWORD2
+
+#######################################
+# Константы состояния (LITERAL1)
+#######################################
+LC_IDLE	LITERAL1
+LC_SUBMIT	LITERAL1
+LC_REBOOT	LITERAL1
+LC_EXIT	LITERAL1
+LC_TIMEOUT	LITERAL1
+LC_VERSION	LITERAL1
+
+#######################################
+# Константы настроек точки доступа (LITERAL1)
+#######################################
+LC_AP_NAME	LITERAL1
+LC_AP_PASS	LITERAL1
+LC_AP_IP	LITERAL1

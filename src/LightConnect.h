@@ -4,7 +4,7 @@
 #ifndef _LightConnect_h
 #define _LightConnect_h
 
-#define LC_VERSION "05.05.26"
+#define LC_VERSION "1.0.0"
 #define LC_AP_NAME    "LightConnect"
 #define LC_AP_PASS    ""
 #define LC_AP_IP      192,168,4,1

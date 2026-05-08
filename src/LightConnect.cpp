@@ -149,7 +149,7 @@ input::placeholder{color:var(--mt)}
   </button>
 </div>
 
-<p class="ft">LightConnect v05.05.26</p>
+<p class="ft">LightConnect v1.0.0</p>
 
 <div class="ov" id="ov" onclick="closeModal(event)">
   <div class="mo">

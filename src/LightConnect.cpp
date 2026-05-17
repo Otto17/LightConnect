@@ -149,7 +149,7 @@ input::placeholder{color:var(--mt)}
   </button>
 </div>
 
-<p class="ft">LightConnect v1.0.0</p>
+<p class="ft">LightConnect v1.0.2</p>
 
 <div class="ov" id="ov" onclick="closeModal(event)">
   <div class="mo">
@@ -369,13 +369,40 @@ void LightConnectClass::_handleSave() {
 void LightConnectClass::_handleScan() {
   int n = WiFi.scanNetworks();
   String j = "[";
-  for (int i = 0; i < n; i++) {
-    if (i) j += ",";
+
+  if (n <= 0) {
+    WiFi.scanDelete();
+    _server.sendHeader("Cache-Control", "no-cache");
+    _server.send(200, "application/json", j + "]");
+    return;
+  }
+
+  // Сортирует индексы сетей RSSI по убыванию
+  int* order = new int[n];
+  for (int i = 0; i < n; i++) order[i] = i;
+
+  for (int i = 0; i < n - 1; i++) {
+    int best = i;
+    for (int k = i + 1; k < n; k++) {
+      if (WiFi.RSSI(order[k]) > WiFi.RSSI(order[best])) best = k;
+    }
+    if (best != i) {
+      int tmp = order[i];
+      order[i] = order[best];
+      order[best] = tmp;
+    }
+  }
+
+  for (int p = 0; p < n; p++) {
+    int i = order[p];
+    if (p) j += ",";
     String name = WiFi.SSID(i);
-    name.replace("\\","\\\\");
-    name.replace("\"","\\\"");
-    j += "{\"s\":\""; j += name;
-    j += "\",\"r\":";  j += WiFi.RSSI(i);
+    name.replace("\\", "\\\\");
+    name.replace("\"", "\\\"");
+    j += "{\"s\":\"";
+    j += name;
+    j += "\",\"r\":";
+    j += WiFi.RSSI(i);
     j += ",\"e\":";
 #ifdef ESP8266
     j += (WiFi.encryptionType(i) != AUTH_OPEN) ? "true" : "false";
@@ -384,10 +411,12 @@ void LightConnectClass::_handleScan() {
 #endif
     j += "}";
   }
+
+  delete[] order;
   j += "]";
   WiFi.scanDelete();
-  _server.sendHeader("Cache-Control","no-cache");
-  _server.send(200,"application/json",j);
+  _server.sendHeader("Cache-Control", "no-cache");
+  _server.send(200, "application/json", j);
 }
 
 void LightConnectClass::_handleReboot() { _status = LC_REBOOT; _sendOk("reboot"); }
